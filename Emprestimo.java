@@ -6,12 +6,18 @@ public class Emprestimo {
     private LocalDate dataEmprestimo;
     private LocalDate dataDevolucao;
 
-    public Emprestimo(Pessoa usuario, Livro livro) {
+    // Construtor que tenta emprestar o livro
+    public Emprestimo(Pessoa usuario, Livro livro) throws Exception {
+        if (!livro.isDisponivel()) {
+            // Se o livro já estiver emprestado, lança uma exceção
+            throw new Exception("O livro '" + livro.getTitulo() + "' já está emprestado!");
+        }
+
         this.usuario = usuario;
         this.livro = livro;
         this.dataEmprestimo = LocalDate.now();
-        this.dataDevolucao = dataEmprestimo.plusDays(7); // prazo padrão de 7 dias
-        livro.setDisponivel(false);
+        this.dataDevolucao = dataEmprestimo.plusDays(7);
+        livro.setDisponivel(false); // marca o livro como emprestado
     }
 
     public void devolverLivro() {
@@ -21,7 +27,7 @@ public class Emprestimo {
 
     @Override
     public String toString() {
-        return "Usuário: " + usuario.getNome() + " | Livro: " + livro.getTitulo() + 
+        return "Usuário: " + usuario.getNome() + " | Livro: " + livro.getTitulo() +
                " | Devolução até: " + dataDevolucao;
     }
 }
