@@ -1,7 +1,7 @@
 public class Livro {
-    private String titulo;
-    private String autor;
-    private String isbn;
+    private final String titulo;
+    private final String autor;
+    private final String isbn;
     private boolean disponivel;
 
     public Livro(String titulo, String autor, String isbn) {

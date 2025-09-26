@@ -1,5 +1,5 @@
 public class Professor extends Pessoa {
-    private String departamento;
+    private final String departamento;
 
     public Professor(String nome, String cpf, String email, String departamento) {
         super(nome, cpf, email);
